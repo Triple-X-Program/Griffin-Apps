@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://github.com/Triple-X-Program/Griffin-Apps/blob/master/icons/xxpmurfy_0.png?raw=true" alt="Pi-Apps logo">
+    <img src="https://github.com/Triple-X-Program/Griffin-Apps/blob/master/icons/48x48.png?raw=true" alt="Pi-Apps logo">
 </p>
 <p align="center">The most popular app store for Raspberry Pi computers. 100% open-source bash scripts (including the GUI).
 <p align="center">
