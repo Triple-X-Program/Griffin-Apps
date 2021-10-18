@@ -16,6 +16,7 @@ error() {
 # Example usage: ~/pi-apps/pkg-install "gparted buffer expect" Arduino
 # "package1 | package2" represents "package1 or package2" (whichever is available) for $1
 
+source "${DIRECTORY}/api" || error "Failed to source $DIRECTORY/api."
 
 PKG_LIST="$1" #quotation-marked, space-seperated list of package names to install
 app="$(basename "$2")" #remove any slashes to just get program name
@@ -248,12 +249,8 @@ elif [ -z "$app" ];then
   error "No app name specified to pkg-install!"
 fi
 
-export LANG=C
-export LC_ALL=C
-export LANGUAGE=C
 IFS=$' \n'
 
-source "${DIRECTORY}/api"
 apt_lock_wait
 
 #sudo apt update
@@ -308,6 +305,8 @@ for package in $PKG_LIST ;do
       error "pkg_install: While installing local packages, $package failed to install."
     fi
     
+    sudo -E apt-mark auto "$packagename" || error "pkg-install: failed to mark the $packagename package as autoremovable.\nlocal package path: $package"
+    
   fi
   
 done
@@ -339,13 +338,6 @@ done
 if echo "$PKG_LIST" | grep -q '*';then 
   error "pkg_install: failed to remove all regex from the package list!\nContents of PKG_LIST:\n$PKG_LIST"
 fi
-}
-
-#mark ALL packages as autoremovable
-{
-for package in $PKG_LIST ;do
-  sudo -E apt-mark auto "$package" || error "pkg-install: failed to mark the $package package as autoremovable."
-done
 }
 
 #format PKG_LIST - remove double spaces, preceding spaces, and trailing spaces.
