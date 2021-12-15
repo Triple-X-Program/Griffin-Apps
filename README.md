@@ -36,7 +36,7 @@ To learn more:
 
 ## To install Pi-Apps
 ```
-wget -qO- https://raw.githubusercontent.com/Botspot/pi-apps/master/install | bash
+apt install flatpak
 ```
 <img src="https://github.com/Botspot/pi-apps/blob/master/icons/screenshots/main%20window.png?raw=true" align="right" width="230px"/>
 Supported systems:
